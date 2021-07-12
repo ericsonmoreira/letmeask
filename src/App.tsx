@@ -1,13 +1,11 @@
-import { Button } from './components/Button';
+import { theme } from './theme';
+import { ChakraProvider, Text } from '@chakra-ui/react';
 
 function App() {
   return (
-    <div>
-      <Button>Alguma coisa 1</Button>
-      <Button>Alguma coisa 2</Button>
-      <Button>Alguma coisa 3</Button>
-      <Button>Alguma coisa 4</Button>
-    </div>
+    <ChakraProvider theme={theme} resetCSS>
+      <Text>Ola mundo</Text>
+    </ChakraProvider>
   );
 }
 
