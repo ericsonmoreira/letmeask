@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 
   return (
     <Basic>
-      <VStack maxW="dm" minW="sm">
+      <VStack maxW="dm" minW="sm" as="form" onSubmit={handleSubmit(onSubmit)}>
         <Image src="/images/logo.svg" alt="letmeask" mb="56px" />
         <Button
           w="full"
@@ -44,18 +44,16 @@ const Home: React.FC = () => {
         </Button>
         <Divider />
         <Text fontSize="sm">Ou entre na sala</Text>
-
         <HookInput
           control={control}
           placeholder="Digite o código da sala"
           name="codSala"
         />
-        {/* <Input placeholder="Digite o código da sala" {...register('codSala')} /> */}
         <Button
           w="full"
           colorScheme="purple"
           leftIcon={<LogInIcon />}
-          onClick={handleSubmit(onSubmit)}
+          type="submit"
         >
           Entrar na sala
         </Button>

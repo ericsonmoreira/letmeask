@@ -18,7 +18,7 @@ const NewRoom: React.FC = () => {
 
   return (
     <Basic>
-      <VStack maxW="dm" minW="sm">
+      <VStack maxW="dm" minW="sm" as="form" onSubmit={handleSubmit(onSubmit)}>
         <Image src="/images/logo.svg" alt="letmeask" />
         <Heading fontSize="2xl">Crirar uma nova sala</Heading>
         <HookInput
@@ -30,10 +30,11 @@ const NewRoom: React.FC = () => {
           w="full"
           colorScheme="purple"
           leftIcon={<LogInIcon />}
-          onClick={handleSubmit(onSubmit)}
+          type="submit"
         >
           Criar sala
         </Button>
+
         <Text fontSize="sm">
           Entrar em uma sala existente?{' '}
           <Link as={RouterLink} to={RouterNames.home}>

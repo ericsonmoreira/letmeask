@@ -9,4 +9,11 @@ export const theme = extendTheme({
     heading: 'Roboto',
     body: 'Poppins',
   },
+  components: {
+    Link: {
+      baseStyle: {
+        color: 'pink.400',
+      },
+    },
+  },
 });
