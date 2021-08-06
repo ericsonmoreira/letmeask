@@ -5,12 +5,19 @@ import { Basic } from 'layouts/Basic';
 import { useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 import RouterNames from 'routes/RouterNames';
+import { yupResolver } from '@hookform/resolvers/yup';
+import schema from './schema';
 interface NewRoomFormData {
   roomName: string;
 }
 
 const NewRoom: React.FC = () => {
-  const { control, handleSubmit } = useForm<NewRoomFormData>();
+  const { control, handleSubmit } = useForm<NewRoomFormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      roomName: '',
+    },
+  });
 
   const onSubmit = (data: NewRoomFormData) => {
     console.log(data);

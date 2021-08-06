@@ -1,4 +1,5 @@
 import { Button, Divider, Image, Text, VStack } from '@chakra-ui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { HookInput } from 'components/HookInput';
 import useAuth from 'hooks/useAuth';
 import { GoogleIcon, LogInIcon } from 'icons';
@@ -6,6 +7,7 @@ import { Basic } from 'layouts/Basic';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import RouterNames from 'routes/RouterNames';
+import schema from './schema';
 
 interface HomeFormData {
   codSala: string;
@@ -14,7 +16,12 @@ interface HomeFormData {
 const Home: React.FC = () => {
   const history = useHistory();
 
-  const { control, handleSubmit } = useForm<HomeFormData>();
+  const { control, handleSubmit } = useForm<HomeFormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      codSala: '',
+    },
+  });
 
   const onSubmit = (data: HomeFormData) => {
     console.log(data);
