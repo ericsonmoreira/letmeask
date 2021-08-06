@@ -23,6 +23,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [React](https://reactjs.org)
 - [Firebase](https://firebase.google.com/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Chakra-ui](https://chakra-ui.com/) NEW 🚀
+- [React Icons](https://react-icons.github.io/react-icons/) NEW 🚀
+- [React Hook Form](https://react-hook-form.com/) NEW 🚀
 
 ## 🚀 Como executar
 
