@@ -26,7 +26,7 @@ const Home: React.FC = () => {
   return (
     <Basic>
       <VStack maxW="dm" minW="sm">
-        <Image src="asstes/images/logo.svg" alt="letmeask" mb="56px" />
+        <Image src="/images/logo.svg" alt="letmeask" mb="56px" />
         <Button
           w="full"
           colorScheme="red"

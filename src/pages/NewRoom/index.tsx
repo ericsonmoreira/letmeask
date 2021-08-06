@@ -4,8 +4,6 @@ import { LogInIcon } from 'icons';
 import { Basic } from 'layouts/Basic';
 import { useForm } from 'react-hook-form';
 
-import LogoImg from 'assets/images/logo.svg';
-
 interface NewRoomFormData {
   roomName: string;
 }
@@ -20,7 +18,7 @@ const NewRoom: React.FC = () => {
   return (
     <Basic>
       <VStack maxW="dm" minW="sm">
-        <img src={LogoImg} alt="letmeask" />
+        <Image src='/images/logo.svg' alt="letmeask" />
         <Text fontSize="sm">Crirar uma nova sala</Text>
         <HookInput
           control={control}
