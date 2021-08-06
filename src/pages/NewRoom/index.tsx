@@ -3,15 +3,21 @@ import { HookInput } from 'components/HookInput';
 import { LogInIcon } from 'icons';
 import { Basic } from 'layouts/Basic';
 import { useForm } from 'react-hook-form';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import RouterNames from 'routes/RouterNames';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './schema';
+import { database } from 'services/firebase';
+import useAuth from 'hooks/useAuth';
 interface NewRoomFormData {
   roomName: string;
 }
 
 const NewRoom: React.FC = () => {
+  const history = useHistory();
+
+  const { user } = useAuth();
+
   const { control, handleSubmit } = useForm<NewRoomFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -19,8 +25,15 @@ const NewRoom: React.FC = () => {
     },
   });
 
-  const onSubmit = (data: NewRoomFormData) => {
-    console.log(data);
+  const onSubmit = async (data: NewRoomFormData) => {
+    const roomRef = database.ref('rooms');
+
+    const firebaseRoom = await roomRef.push({
+      title: data.roomName,
+      authorId: user?.id,
+    });
+
+    history.push(RouterNames.room.replace(':id', String(firebaseRoom.key)));
   };
 
   return (

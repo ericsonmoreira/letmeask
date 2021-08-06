@@ -7,27 +7,24 @@ import { Basic } from 'layouts/Basic';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import RouterNames from 'routes/RouterNames';
+import { database } from 'services/firebase';
 import schema from './schema';
 
 interface HomeFormData {
-  codSala: string;
+  roomCode: string;
 }
 
 const Home: React.FC = () => {
   const history = useHistory();
 
+  const { user, signInWithGoogle } = useAuth();
+
   const { control, handleSubmit } = useForm<HomeFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      codSala: '',
+      roomCode: '',
     },
   });
-
-  const onSubmit = (data: HomeFormData) => {
-    console.log(data);
-  };
-
-  const { user, signInWithGoogle } = useAuth();
 
   const handleCreateRoom = async () => {
     if (!user) {
@@ -35,6 +32,18 @@ const Home: React.FC = () => {
     }
 
     history.push(RouterNames.newRoom);
+  };
+
+  const onSubmit = async (data: HomeFormData) => {
+    const { roomCode } = data;
+
+    const roomRef = await database.ref(`rooms/${roomCode}`).get();
+
+    if (!roomRef.exists()) {
+      alert('Sala inexistente');
+    }
+
+    history.push(RouterNames.room.replace(':id', roomCode));
   };
 
   return (
@@ -54,7 +63,7 @@ const Home: React.FC = () => {
         <HookInput
           control={control}
           placeholder="Digite o código da sala"
-          name="codSala"
+          name="roomCode"
         />
         <Button
           w="full"
