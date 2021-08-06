@@ -1,11 +1,11 @@
 import { Button, Divider, Image, Text, VStack } from '@chakra-ui/react';
 import { HookInput } from 'components/HookInput';
+import useAuth from 'hooks/useAuth';
 import { GoogleIcon, LogInIcon } from 'icons';
 import { Basic } from 'layouts/Basic';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import RouterNames from 'routes/RouterNames';
-import { auth, FireBase } from 'services/firebase';
 
 interface HomeFormData {
   codSala: string;
@@ -20,12 +20,12 @@ const Home: React.FC = () => {
     console.log(data);
   };
 
+  const { user, signInWithGoogle } = useAuth();
+
   const handleCreateRoom = async () => {
-    const provider = new FireBase.auth.GoogleAuthProvider();
-
-    const response = await auth.signInWithPopup(provider);
-
-    console.log(response);
+    if (!user) {
+      await signInWithGoogle();
+    }
 
     history.push(RouterNames.newRoom);
   };
