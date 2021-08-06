@@ -12,10 +12,11 @@ interface HookInputProps extends InputProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any>;
   name: string;
+  label?: string;
 }
 
 const HookInput: React.FC<HookInputProps> = (props) => {
-  const { control, name, ...rest } = props;
+  const { control, name, label, ...rest } = props;
 
   const {
     field: { ref, ...inputProps },
@@ -27,7 +28,7 @@ const HookInput: React.FC<HookInputProps> = (props) => {
 
   return (
     <FormControl isInvalid={!!error}>
-      <FormLabel htmlFor="name">First name</FormLabel>
+      {label && <FormLabel htmlFor="name">{label}</FormLabel>}
       <Input ref={ref} {...rest} {...inputProps} />
       <FormErrorMessage>{error?.message}</FormErrorMessage>
     </FormControl>
