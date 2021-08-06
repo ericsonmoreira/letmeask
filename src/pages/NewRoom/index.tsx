@@ -1,9 +1,10 @@
-import { Button, Image, Link, Text, VStack } from '@chakra-ui/react';
+import { Button, Heading, Image, Link, Text, VStack } from '@chakra-ui/react';
 import { HookInput } from 'components/HookInput';
 import { LogInIcon } from 'icons';
 import { Basic } from 'layouts/Basic';
 import { useForm } from 'react-hook-form';
-
+import { Link as RouterLink } from 'react-router-dom';
+import RouterNames from 'routes/RouterNames';
 interface NewRoomFormData {
   roomName: string;
 }
@@ -18,8 +19,8 @@ const NewRoom: React.FC = () => {
   return (
     <Basic>
       <VStack maxW="dm" minW="sm">
-        <Image src='/images/logo.svg' alt="letmeask" />
-        <Text fontSize="sm">Crirar uma nova sala</Text>
+        <Image src="/images/logo.svg" alt="letmeask" />
+        <Heading fontSize="2xl">Crirar uma nova sala</Heading>
         <HookInput
           control={control}
           placeholder="Nome da sala"
@@ -34,7 +35,10 @@ const NewRoom: React.FC = () => {
           Criar sala
         </Button>
         <Text fontSize="sm">
-          Entrar em uma sala existente? <Link>Clique aqui</Link>
+          Entrar em uma sala existente?{' '}
+          <Link as={RouterLink} to={RouterNames.home}>
+            Clique aqui
+          </Link>
         </Text>
       </VStack>
     </Basic>

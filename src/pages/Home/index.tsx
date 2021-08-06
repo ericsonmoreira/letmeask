@@ -5,6 +5,7 @@ import { Basic } from 'layouts/Basic';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import RouterNames from 'routes/RouterNames';
+import { auth, FireBase } from 'services/firebase';
 
 interface HomeFormData {
   codSala: string;
@@ -19,7 +20,13 @@ const Home: React.FC = () => {
     console.log(data);
   };
 
-  const handleNavigateToNewRoom = () => {
+  const handleCreateRoom = async () => {
+    const provider = new FireBase.auth.GoogleAuthProvider();
+
+    const response = await auth.signInWithPopup(provider);
+
+    console.log(response);
+
     history.push(RouterNames.newRoom);
   };
 
@@ -31,7 +38,7 @@ const Home: React.FC = () => {
           w="full"
           colorScheme="red"
           leftIcon={<GoogleIcon />}
-          onClick={handleNavigateToNewRoom}
+          onClick={handleCreateRoom}
         >
           Crie sua sala com o Google
         </Button>
