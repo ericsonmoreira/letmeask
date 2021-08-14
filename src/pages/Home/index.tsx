@@ -17,8 +17,6 @@ interface HomeFormData {
 const Home: React.FC = () => {
   const history = useHistory();
 
-  // Testando ssh
-
   const { user, signInWithGoogle } = useAuth();
 
   const { control, handleSubmit } = useForm<HomeFormData>({
