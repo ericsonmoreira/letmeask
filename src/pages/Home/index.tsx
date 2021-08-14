@@ -26,7 +26,6 @@ const Home: React.FC = () => {
     },
   });
 
-  
   const handleCreateRoom = async () => {
     if (!user) {
       await signInWithGoogle();
