@@ -1,4 +1,13 @@
-import { Box, Heading, Flex, Image, Text, Container } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Flex,
+  Image,
+  Text,
+  Container,
+  Badge,
+  Divider,
+} from '@chakra-ui/react';
 
 interface MainProps {
   title: string;
@@ -14,7 +23,6 @@ const Main: React.FC<MainProps> = (props) => {
         paddingY={4}
         paddingX={24}
         w="100%"
-        bg="tomato"
         justifyContent="space-between"
         alignItems="center"
       >
@@ -23,11 +31,16 @@ const Main: React.FC<MainProps> = (props) => {
           <Text>Código</Text>
         </Box>
       </Flex>
+      <Divider />
       <Container maxW="3xl" paddingY={8}>
-        <Flex>
-          <Heading marginRight={2}>{title}</Heading>
+        <Flex alignItems="center">
+          <Heading fontSize="medium">
+            {title}
+          </Heading>
           {numberQuestions && (
-            <Heading>Quantidade de perguntas: {numberQuestions}</Heading>
+            <Badge variant="solid" colorScheme="purple" ml={4}>
+              Quantidade de perguntas: {numberQuestions}
+            </Badge>
           )}
         </Flex>
         {children}
